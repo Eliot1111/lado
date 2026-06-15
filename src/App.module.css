@@ -1,0 +1,31 @@
+.scene {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: min(50vw, 640px);
+  height: 100vh;
+  height: 100dvh;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.92;
+}
+
+@media (max-width: 1024px) {
+  .scene {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: min(38vh, 320px);
+    opacity: 0.8;
+  }
+}
+
+@media (max-width: 768px) {
+  .scene {
+    height: min(32vh, 260px);
+    opacity: 0.65;
+  }
+}
