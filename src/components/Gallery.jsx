@@ -3,6 +3,7 @@ import { motion, useInView } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { PHOTOS, photo } from '../data/constants';
+import { useIsMobile, useMediaQuery } from '../hooks/useMedia';
 import styles from './Gallery.module.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -20,25 +21,28 @@ const layout = [
   { photo: PHOTOS[18], span: 'j' },
 ];
 
-function GalleryItem({ item, index }) {
+function GalleryItem({ item, index, parallax }) {
   const ref = useRef(null);
   const imgRef = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-8%' });
 
   useEffect(() => {
+    if (!parallax) return;
     const el = imgRef.current;
-    if (!el) return;
+    const trigger = ref.current;
+    if (!el || !trigger) return;
+
     const st = ScrollTrigger.create({
-      trigger: ref.current,
+      trigger,
       start: 'top bottom',
       end: 'bottom top',
-      scrub: 1.2,
+      scrub: 2,
       onUpdate: (self) => {
-        el.style.transform = `translateY(${(self.progress - 0.5) * 40}px) scale(1.05)`;
+        el.style.transform = `translate3d(0, ${(self.progress - 0.5) * 32}px, 0) scale(1.04)`;
       },
     });
     return () => st.kill();
-  }, []);
+  }, [parallax]);
 
   return (
     <motion.figure
@@ -50,7 +54,7 @@ function GalleryItem({ item, index }) {
     >
       <div className={styles.frame}>
         <div ref={imgRef} className={styles.imgWrap}>
-          <img src={photo(item.photo)} alt="" loading="lazy" />
+          <img src={photo(item.photo)} alt="" loading="lazy" decoding="async" />
         </div>
         <div className={styles.shine} />
       </div>
@@ -61,6 +65,9 @@ function GalleryItem({ item, index }) {
 export default function Gallery() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-10%' });
+  const isMobile = useIsMobile();
+  const reducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
+  const parallax = !isMobile && !reducedMotion;
 
   return (
     <section id="gallery" className={styles.gallery} ref={ref}>
@@ -71,16 +78,16 @@ export default function Gallery() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
-          <p className="section-label">Gallery</p>
-          <h2 className="section-title">Атмосфера вечера</h2>
+          <p className="section-label">Галерея</p>
+          <h2 className="section-title">Летняя атмосфера</h2>
           <p className="section-desc">
-            Интерьер, блюда и моменты, которые определяют характер lado.
+            Интерьер, блюда и моменты, которые определяют характер «Ладо».
           </p>
         </motion.div>
 
         <div className={styles.mosaic}>
           {layout.map((item, i) => (
-            <GalleryItem key={item.photo} item={item} index={i} />
+            <GalleryItem key={item.photo} item={item} index={i} parallax={parallax} />
           ))}
         </div>
       </div>

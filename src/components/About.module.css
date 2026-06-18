@@ -30,14 +30,14 @@
   display: block;
   font-family: var(--font-serif);
   font-size: 2.25rem;
-  color: var(--gold);
+  color: var(--accent-sky);
   line-height: 1;
 }
 
 .statLabel {
   display: block;
   font-size: 0.7rem;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--text-subtle);
   margin-top: 0.4rem;
@@ -54,6 +54,7 @@
   border-radius: var(--radius-lg);
   overflow: hidden;
   border: 1px solid var(--border);
+  box-shadow: var(--shadow-soft);
 }
 
 .imageMain img {
@@ -73,8 +74,8 @@
   aspect-ratio: 1;
   border-radius: var(--radius-md);
   overflow: hidden;
-  border: 1px solid var(--border-gold);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--border-accent);
+  box-shadow: var(--shadow-soft);
 }
 
 .imageSecondary img {

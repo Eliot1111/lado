@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useRef } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -8,27 +8,26 @@ import Reservation from './components/Reservation';
 import Contacts from './components/Contacts';
 import ThreeScene from './components/ThreeScene';
 import Footer from './components/Footer';
-import { useScrollProgress } from './hooks/useScroll';
-import { useIsMobile, useMouse } from './hooks/useMedia';
+import { useSceneInput } from './hooks/useSceneInput';
+import { useGpuTier } from './hooks/useGpuTier';
 import styles from './App.module.css';
 
 export default function App() {
-  const scrollProgress = useScrollProgress();
-  const mouse = useMouse();
-  const isMobile = useIsMobile();
-  const mouse3d = useMemo(() => (isMobile ? { x: 0, y: 0 } : mouse), [isMobile, mouse]);
+  const progressFillRef = useRef(null);
+  useSceneInput(progressFillRef);
+  const gpuTier = useGpuTier();
 
   return (
     <>
       <div className="noise" aria-hidden="true" />
       <div className="progress-bar" aria-hidden="true">
-        <div className="progress-bar__fill" style={{ transform: `scaleX(${scrollProgress})` }} />
+        <div ref={progressFillRef} className="progress-bar__fill" style={{ transform: 'scaleX(0)' }} />
       </div>
 
       <Navbar />
 
       <div className={styles.scene}>
-        <ThreeScene scrollProgress={scrollProgress} mouse={mouse3d} lowQuality={isMobile} />
+        <ThreeScene gpuTier={gpuTier} />
       </div>
 
       <main>

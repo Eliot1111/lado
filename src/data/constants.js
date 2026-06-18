@@ -7,27 +7,31 @@ export const PHOTOS = [
   'IMG_7297.jpg',
 ];
 
-// HEIC source for menu — replace with .jpg or .webp if browser support is insufficient
-export const MENU_HEIC = '/photos/IMG_7290.HEIC';
-export const MENU_IMAGE_FALLBACK = '/photos/IMG_7290.jpg';
+export const MENU_FOOD_PHOTOS = {
+  hero: 'IMG_7293.jpg',
+  cards: ['IMG_7285.jpg', 'IMG_7279.jpg', 'IMG_7291.jpg', 'IMG_7295.jpg', 'IMG_7288.jpg'],
+};
 
 export const photo = (name) => `/photos/${name}`;
 
+export const YANDEX_MAPS_URL = 'https://yandex.com/maps/-/CTAe5Rzy';
+
 export const NAV_LINKS = [
-  { id: 'about', label: 'О ресторане', hint: 'About' },
-  { id: 'menu', label: 'Меню', hint: 'Menu' },
-  { id: 'gallery', label: 'Галерея', hint: 'Gallery' },
-  { id: 'reservation', label: 'Бронирование', hint: 'Reserve' },
-  { id: 'contacts', label: 'Контакты', hint: 'Contact' },
+  { id: 'about', label: 'О ресторане' },
+  { id: 'menu', label: 'Меню' },
+  { id: 'gallery', label: 'Галерея' },
+  { id: 'reservation', label: 'Бронирование' },
+  { id: 'contacts', label: 'Контакты' },
 ];
 
 export const RESTAURANT = {
-  name: 'lado',
-  tagline: 'Modern Moscow Dining',
-  phone: '+7 (495) 123-45-67',
-  address: 'Москва, Патриаршие пруды, 12',
-  hours: 'Вт–Вс · 18:00 — 00:00',
+  name: 'Ладо',
+  tagline: 'Светлый ресторан в Москве',
+  phone: '+7 (925) 195-61-69',
+  address: 'Москва, Кривоколенный переулок, 9с2',
+  hours: 'Ежедневно · 12:00 — 00:00',
   email: 'hello@lado.moscow',
+  openedYear: 2026,
 };
 
 export function lerp(a, b, t) {

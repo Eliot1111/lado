@@ -1,23 +1,36 @@
 import { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { MeshTransmissionMaterial } from '@react-three/drei';
 import * as THREE from 'three';
 import { updateDrops } from '../hooks/useWinePour';
 
 const dropMat = new THREE.MeshPhysicalMaterial({
-  color: '#9e1838',
-  emissive: '#4a0818',
+  color: '#7a1228',
+  emissive: '#3a0610',
+  emissiveIntensity: 0.2,
+  roughness: 0.12,
+  clearcoat: 0.7,
+  transparent: false,
+});
+
+const streamMat = new THREE.MeshPhysicalMaterial({
+  color: '#8b1a32',
+  emissive: '#3d0612',
   emissiveIntensity: 0.15,
   roughness: 0.1,
-  clearcoat: 0.8,
-  transparent: true,
-  opacity: 0.95,
+  clearcoat: 0.6,
+  transparent: false,
 });
 
 export default function WinePourEffect({ pourOrigin, fillY, pouring, drops, low }) {
   const streamRef = useRef();
   const instRef = useRef();
   const dummy = useRef(new THREE.Object3D()).current;
+  const frame = useRef(0);
+  const p0 = useRef(new THREE.Vector3());
+  const p1 = useRef(new THREE.Vector3());
+  const p2 = useRef(new THREE.Vector3());
+  const p3 = useRef(new THREE.Vector3());
+  const curve = useRef(new THREE.CubicBezierCurve3(p0.current, p1.current, p2.current, p3.current));
 
   const dropGeo = useRef(new THREE.SphereGeometry(1, low ? 8 : 12, low ? 8 : 12)).current;
 
@@ -31,16 +44,17 @@ export default function WinePourEffect({ pourOrigin, fillY, pouring, drops, low 
       streamRef.current.visible = isPouring && fillY.current > 0.01;
 
       if (isPouring) {
-        const end = new THREE.Vector3(0, surfaceY, 0);
-        const curve = new THREE.CubicBezierCurve3(
-          pourOrigin.clone(),
-          new THREE.Vector3(pourOrigin.x + 0.05, pourOrigin.y - 0.35, pourOrigin.z),
-          new THREE.Vector3(0.03, (pourOrigin.y + surfaceY) * 0.5, 0),
-          end
-        );
-        const tubeGeo = new THREE.TubeGeometry(curve, 28, 0.01 + Math.sin(Date.now() * 0.01) * 0.002, 8, false);
-        streamRef.current.geometry.dispose();
-        streamRef.current.geometry = tubeGeo;
+        frame.current += 1;
+        if (frame.current % 2 === 0) {
+          p0.current.copy(pourOrigin);
+          p1.current.set(pourOrigin.x + 0.05, pourOrigin.y - 0.35, pourOrigin.z);
+          p2.current.set(0.03, (pourOrigin.y + surfaceY) * 0.5, 0);
+          p3.current.set(0, surfaceY, 0);
+
+          const tubeGeo = new THREE.TubeGeometry(curve.current, low ? 20 : 24, 0.011, 6, false);
+          if (streamRef.current.geometry) streamRef.current.geometry.dispose();
+          streamRef.current.geometry = tubeGeo;
+        }
       }
     }
 
@@ -74,19 +88,8 @@ export default function WinePourEffect({ pourOrigin, fillY, pouring, drops, low 
         </mesh>
       </group>
 
-      <mesh ref={streamRef} visible={false}>
-        <cylinderGeometry args={[0.01, 0.01, 0.1, 8]} />
-        <MeshTransmissionMaterial
-          color="#a82040"
-          attenuationColor="#3a0614"
-          attenuationDistance={0.15}
-          transmission={0.55}
-          roughness={0.08}
-          thickness={0.4}
-          ior={1.34}
-          samples={low ? 4 : 6}
-          resolution={256}
-        />
+      <mesh ref={streamRef} visible={false} material={streamMat}>
+        <cylinderGeometry args={[0.01, 0.01, 0.1, 6]} />
       </mesh>
 
       <instancedMesh

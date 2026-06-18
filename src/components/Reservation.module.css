@@ -36,7 +36,7 @@
 
 .field span {
   font-size: 0.7rem;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--text-subtle);
 }
@@ -47,7 +47,7 @@
   padding: 0.9rem 1rem;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.03);
+  background: #fff;
   color: var(--text);
   font-family: var(--font-sans);
   font-size: 0.95rem;
@@ -58,8 +58,8 @@
 .field select:focus,
 .field textarea:focus {
   outline: none;
-  border-color: var(--border-gold);
-  box-shadow: 0 0 0 3px rgba(201, 169, 98, 0.12);
+  border-color: var(--border-accent);
+  box-shadow: 0 0 0 3px rgba(94, 179, 217, 0.15);
 }
 
 .field textarea { resize: vertical; min-height: 88px; }
@@ -79,10 +79,10 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  border: 1px solid var(--border-gold);
+  border: 1px solid var(--border-accent);
   font-size: 1.5rem;
-  color: var(--gold);
-  box-shadow: 0 0 40px var(--gold-glow);
+  color: var(--accent-sky);
+  background: rgba(94, 179, 217, 0.08);
 }
 
 .success h3 {

@@ -15,7 +15,7 @@
   position: absolute;
   inset: 15%;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(201, 169, 98, 0.1) 0%, transparent 65%);
+  background: radial-gradient(circle, rgba(94, 179, 217, 0.12) 0%, rgba(240, 199, 94, 0.06) 40%, transparent 65%);
   pointer-events: none;
   filter: blur(50px);
 }

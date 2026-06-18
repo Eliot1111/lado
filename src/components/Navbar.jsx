@@ -4,6 +4,27 @@ import { NAV_LINKS, RESTAURANT, photo } from '../data/constants';
 import { scrollTo } from '../hooks/useScroll';
 import styles from './Navbar.module.css';
 
+function LogoIcon() {
+  return (
+    <svg className={styles.logoIcon} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <circle cx="12" cy="8" r="4" fill="currentColor" opacity="0.9" />
+      <path
+        d="M6 18c1.5-3 3.5-4.5 6-4.5s4.5 1.5 6 4.5"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+      <path
+        d="M4 14c2-1 4-1.5 8-1.5s6 0.5 8 1.5"
+        stroke="currentColor"
+        strokeWidth="1"
+        strokeLinecap="round"
+        opacity="0.5"
+      />
+    </svg>
+  );
+}
+
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -28,7 +49,9 @@ export default function Navbar() {
     <>
       <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
         <button type="button" className={styles.logo} onClick={() => go('hero')}>
-          <span className={styles.logoMark}>{RESTAURANT.name[0]}</span>
+          <span className={styles.logoMark}>
+            <LogoIcon />
+          </span>
           <span className={styles.logoText}>{RESTAURANT.name}</span>
         </button>
 
@@ -74,7 +97,6 @@ export default function Navbar() {
                   transition={{ delay: 0.08 + i * 0.07, duration: 0.5 }}
                   onClick={() => go(link.id)}
                 >
-                  <span className={styles.navHint}>{link.hint}</span>
                   <span className={styles.navLabel}>{link.label}</span>
                 </motion.button>
               ))}

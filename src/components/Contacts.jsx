@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { RESTAURANT } from '../data/constants';
+import { RESTAURANT, YANDEX_MAPS_URL } from '../data/constants';
 import styles from './Contacts.module.css';
 
 export default function Contacts() {
@@ -16,8 +16,11 @@ export default function Contacts() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
-          <p className="section-label">Contact</p>
+          <p className="section-label">Контакты</p>
           <h2 className="section-title">Как нас найти</h2>
+          <p className="section-desc">
+            Мы в центре Москвы — рядом с метро «Тургеневская». Добро пожаловать.
+          </p>
         </motion.div>
 
         <div className={styles.grid}>
@@ -33,37 +36,44 @@ export default function Contacts() {
             </div>
             <div className={styles.block}>
               <span className={styles.label}>Телефон</span>
-              <a href={`tel:${RESTAURANT.phone.replace(/\s/g, '')}`}>{RESTAURANT.phone}</a>
-            </div>
-            <div className={styles.block}>
-              <span className={styles.label}>Email</span>
-              <a href={`mailto:${RESTAURANT.email}`}>{RESTAURANT.email}</a>
+              <a href={`tel:${RESTAURANT.phone.replace(/\D/g, '')}`}>{RESTAURANT.phone}</a>
             </div>
             <div className={styles.block}>
               <span className={styles.label}>Часы работы</span>
               <p>{RESTAURANT.hours}</p>
             </div>
+            <div className={styles.block}>
+              <span className={styles.label}>Email</span>
+              <a href={`mailto:${RESTAURANT.email}`}>{RESTAURANT.email}</a>
+            </div>
           </motion.div>
 
           <motion.div
-            className={styles.map}
             initial={{ opacity: 0, x: 30 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <div className={styles.mapInner}>
-              <div className={styles.mapGrid} aria-hidden="true">
-                {Array.from({ length: 48 }).map((_, i) => (
-                  <span key={i} />
-                ))}
+            <a
+              href={YANDEX_MAPS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.mapLink}
+              aria-label="Открыть в Яндекс Картах"
+            >
+              <div className={styles.mapInner}>
+                <div className={styles.mapGrid} aria-hidden="true">
+                  {Array.from({ length: 48 }).map((_, i) => (
+                    <span key={i} />
+                  ))}
+                </div>
+                <div className={styles.mapPin} aria-hidden="true">
+                  <span className={styles.pinDot} />
+                  <span className={styles.pinLabel}>Ладо</span>
+                </div>
+                <div className={styles.mapGlow} aria-hidden="true" />
+                <span className={styles.mapCta}>Открыть в Яндекс Картах</span>
               </div>
-              <div className={styles.mapPin}>
-                <span className={styles.pinDot} />
-                <span className={styles.pinLabel}>lado</span>
-              </div>
-              <div className={styles.mapGlow} />
-            </div>
-            <p className={styles.mapCaption}>Патриаршие пруды · Москва</p>
+            </a>
           </motion.div>
         </div>
       </div>

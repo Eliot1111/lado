@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { photo } from '../data/constants';
+import { RESTAURANT, photo } from '../data/constants';
 import styles from './About.module.css';
 
 export default function About() {
@@ -12,36 +12,30 @@ export default function About() {
       <div className="container">
         <div className={styles.grid}>
           <motion.div
-            className={styles.text}
             initial={{ opacity: 0, x: -40 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           >
-            <p className="section-label">About</p>
-            <h2 className="section-title">Пространство вкуса и света</h2>
-            <div className="gold-line" />
+            <p className="section-label">О ресторане</p>
+            <h2 className="section-title">Летнее настроение в центре Москвы</h2>
+            <div className="accent-line" />
             <p className="section-desc">
-              lado — это вечерний ресторан на Патриарших, где авторская кухня
-              встречается с архитектурой интерьера. Мягкий свет, приглушённые
-              тона, открытая кухня и внимание к каждому гостю.
+              Ресторан работает с {RESTAURANT.openedYear} года и уже стал местом для тех,
+              кто ценит красивую подачу, летнюю атмосферу и современную кухню в Москве.
             </p>
             <p className={styles.extra}>
-              Мы работаем с сезонными продуктами, создаём блюда как композиции
-              и подбираем вина, которые раскрывают характер каждого вечера.
+              В «{RESTAURANT.name}» — светлый зал, сезонные продукты и блюда, которые хочется
+              фотографировать. Уютно днём и вечером, без лишней пафосности.
             </p>
 
             <div className={styles.stats}>
               <div>
-                <span className={styles.statNum}>12</span>
-                <span className={styles.statLabel}>Столов в зале</span>
+                <span className={styles.statNum}>{RESTAURANT.openedYear}</span>
+                <span className={styles.statLabel}>год открытия</span>
               </div>
               <div>
                 <span className={styles.statNum}>48</span>
-                <span className={styles.statLabel}>Позиций в меню</span>
-              </div>
-              <div>
-                <span className={styles.statNum}>2019</span>
-                <span className={styles.statLabel}>Год открытия</span>
+                <span className={styles.statLabel}>позиций в меню</span>
               </div>
             </div>
           </motion.div>
@@ -53,10 +47,10 @@ export default function About() {
             transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
           >
             <div className={styles.imageMain}>
-              <img src={photo('IMG_7293.jpg')} alt="Интерьер ресторана lado" loading="lazy" />
+              <img src={photo('IMG_7288.jpg')} alt="Интерьер ресторана Ладо" loading="lazy" />
             </div>
             <div className={styles.imageSecondary}>
-              <img src={photo('IMG_7285.jpg')} alt="Блюдо" loading="lazy" />
+              <img src={photo('IMG_7291.jpg')} alt="Блюдо в ресторане Ладо" loading="lazy" />
             </div>
           </motion.div>
         </div>

@@ -37,12 +37,14 @@
   border-radius: var(--radius-md);
   overflow: hidden;
   border: 1px solid var(--border);
+  background: var(--bg-elevated);
+  box-shadow: var(--shadow-card);
   transition: border-color var(--transition), box-shadow var(--transition);
 }
 
 .frame:hover {
-  border-color: var(--border-gold);
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+  border-color: var(--border-accent);
+  box-shadow: var(--shadow-soft);
 }
 
 .imgWrap {
@@ -60,7 +62,7 @@
 .shine {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 50%);
+  background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%);
   pointer-events: none;
   opacity: 0;
   transition: opacity var(--transition);

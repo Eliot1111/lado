@@ -27,7 +27,7 @@ export default function Reservation() {
       <div className="container">
         <div className={styles.grid}>
           <div className={styles.intro}>
-            <p className="section-label">Reservation</p>
+            <p className="section-label">Бронирование</p>
             <h2 className="section-title">Забронировать стол</h2>
             <div className="gold-line" />
             <p className="section-desc">

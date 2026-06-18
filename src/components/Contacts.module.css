@@ -22,9 +22,9 @@
 .block .label {
   display: block;
   font-size: 0.65rem;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--accent-sky);
   margin-bottom: 0.5rem;
 }
 
@@ -32,11 +32,25 @@
 .block a {
   font-family: var(--font-serif);
   font-size: 1.35rem;
-  color: var(--milk);
+  color: var(--text);
   transition: color var(--transition);
 }
 
-.block a:hover { color: var(--gold); }
+.block a:hover { color: var(--accent-sky); }
+
+.mapLink {
+  display: block;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform var(--transition);
+}
+
+.mapLink:hover { transform: translateY(-3px); }
+
+.mapLink:focus-visible .mapInner {
+  outline: 2px solid var(--accent-sky);
+  outline-offset: 4px;
+}
 
 .mapInner {
   position: relative;
@@ -44,7 +58,14 @@
   border-radius: var(--radius-xl);
   overflow: hidden;
   border: 1px solid var(--border);
-  background: var(--bg-elevated);
+  background: linear-gradient(135deg, #eef6fa 0%, #f8f4ec 50%, #eef8f0 100%);
+  box-shadow: var(--shadow-soft);
+  transition: box-shadow var(--transition), border-color var(--transition);
+}
+
+.mapLink:hover .mapInner {
+  box-shadow: 0 12px 40px var(--accent-glow);
+  border-color: var(--border-accent);
 }
 
 .mapGrid {
@@ -53,11 +74,11 @@
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   grid-template-rows: repeat(6, 1fr);
-  opacity: 0.35;
+  opacity: 0.4;
 }
 
 .mapGrid span {
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(94, 179, 217, 0.12);
 }
 
 .mapPin {
@@ -69,14 +90,15 @@
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
+  pointer-events: none;
 }
 
 .pinDot {
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background: var(--gold);
-  box-shadow: 0 0 24px var(--gold-glow);
+  background: var(--accent-sky);
+  box-shadow: 0 0 20px var(--accent-glow);
   animation: ping 2s ease-in-out infinite;
 }
 
@@ -87,9 +109,9 @@
 
 .pinLabel {
   font-size: 0.65rem;
-  letter-spacing: 0.25em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--accent-sky);
 }
 
 .mapGlow {
@@ -98,19 +120,42 @@
   left: 40%;
   width: 40%;
   height: 40%;
-  background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%);
+  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
   filter: blur(40px);
   pointer-events: none;
 }
 
-.mapCaption {
-  margin-top: 1rem;
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
-  color: var(--text-subtle);
-  text-align: center;
+.mapCta {
+  position: absolute;
+  bottom: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.55rem 1.1rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  white-space: nowrap;
+  transition: color var(--transition), background var(--transition);
+}
+
+.mapLink:hover .mapCta {
+  color: var(--accent-sky);
+  background: #fff;
 }
 
 @media (max-width: 900px) {
   .grid { grid-template-columns: 1fr; }
+  .mapInner { min-height: 220px; }
+}
+
+@media (max-width: 768px) {
+  .mapInner {
+    aspect-ratio: 16 / 11;
+    min-height: 200px;
+  }
 }

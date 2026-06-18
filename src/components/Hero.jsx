@@ -10,27 +10,17 @@ export default function Hero() {
 
   return (
     <section id="hero" className={styles.hero} ref={ref}>
+      <div className={styles.sunGlow} aria-hidden="true" />
       <div className="container">
         <div className={styles.grid}>
           <div className={styles.content}>
-            <motion.p
-              className={styles.eyebrow}
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7 }}
-            >
-              {RESTAURANT.tagline}
-            </motion.p>
-
             <motion.h1
               className={styles.title}
               initial={{ opacity: 0, y: 40 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.9, delay: 0.1 }}
             >
-              Авторская кухня
-              <br />
-              <em>в сердце Москвы</em>
+              {RESTAURANT.name}
             </motion.h1>
 
             <motion.p
@@ -39,8 +29,7 @@ export default function Hero() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              Авторская кухня, вечерняя атмосфера и гастрономический опыт
-              в сердце Москвы. Приватность, эстетика и вкус — в каждой детали.
+              Светлый ресторан в Москве с летним настроением, авторской кухней и красивой подачей.
             </motion.p>
 
             <motion.div
@@ -49,11 +38,11 @@ export default function Hero() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.35 }}
             >
-              <button type="button" className="btn btn-primary" onClick={() => scrollTo('reservation')}>
-                Забронировать стол
+              <button type="button" className="btn btn-primary" onClick={() => scrollTo('menu')}>
+                Посмотреть меню
               </button>
-              <button type="button" className="btn btn-ghost" onClick={() => scrollTo('menu')}>
-                Смотреть меню
+              <button type="button" className="btn btn-ghost" onClick={() => scrollTo('reservation')}>
+                Забронировать стол
               </button>
             </motion.div>
 
@@ -79,7 +68,7 @@ export default function Hero() {
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2 }}
       >
-        <span>Scroll</span>
+        <span>Листайте</span>
         <div className={styles.scrollLine} />
       </motion.div>
     </section>

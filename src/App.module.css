@@ -8,6 +8,8 @@
   z-index: 1;
   pointer-events: none;
   opacity: 0.92;
+  contain: layout style paint;
+  transform: translateZ(0);
 }
 
 @media (max-width: 1024px) {
