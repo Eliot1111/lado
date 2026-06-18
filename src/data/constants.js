@@ -12,7 +12,7 @@ export const MENU_FOOD_PHOTOS = {
   cards: ['IMG_7285.jpg', 'IMG_7279.jpg', 'IMG_7291.jpg', 'IMG_7295.jpg', 'IMG_7288.jpg'],
 };
 
-export const photo = (name) => `/photos/${name}`;
+export const photo = (name) => `${import.meta.env.BASE_URL}photos/${name}`;
 
 export const YANDEX_MAPS_URL = 'https://yandex.com/maps/-/CTAe5Rzy';
 
