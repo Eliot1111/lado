@@ -1,50 +1,54 @@
+/**
+ * Калорийность — ориентировочная для ресторанной порции
+ * (по данным открытых nutrition-справочников и аналогов в ресторанах).
+ */
 export const MENU_CATEGORIES = [
   {
     id: 'starters',
-    title: 'Starters',
-    subtitle: 'Закуски',
+    title: 'Закуски',
     items: [
-      { name: 'Тартар из тунца', desc: 'Авocado, юдзу, кунжутное масло', price: 1680 },
-      { name: 'Утиная грудка', desc: 'Кaramelized fig, бalsamic reduction', price: 1420 },
-      { name: 'Бurrata', desc: 'Heirloom tomatoes, basil oil', price: 1290 },
-      { name: 'Осьминог', desc: 'Paprika emulsion, charred leek', price: 1890 },
+      { name: 'Тартар из тунца', desc: 'Авокадо, юдзу, кунжутное масло', price: 1680, calories: 350 },
+      { name: 'Утиная грудка', desc: 'Инжир карамелизованный, бальзамический соус', price: 1420, calories: 380 },
+      { name: 'Burrata', desc: 'Томаты, масло базилика', price: 1290, calories: 470 },
+      { name: 'Осьминог', desc: 'Эмульсия из паприки, обжжённый лук-порей', price: 1890, calories: 280 },
     ],
   },
   {
     id: 'mains',
-    title: 'Main Courses',
-    subtitle: 'Основные блюда',
+    title: 'Основные блюда',
     items: [
-      { name: 'Стейк ribeye', desc: 'Dry-aged 45 days, bone marrow butter', price: 4200 },
-      { name: 'Дикий лосось', desc: 'Champagne beurre blanc, caviar', price: 2980 },
-      { name: 'Утка confit', desc: 'Cherry glaze, parsnip purée', price: 2650 },
-      { name: 'Ризotto с трюфелем', desc: 'Black truffle, aged parmesan', price: 2340 },
+      { name: 'Стейк ribeye', desc: 'Dry-aged 45 дней, масло из костного мозга', price: 4200, calories: 780 },
+      { name: 'Дикий лосось', desc: 'Бёль-бланс с шампанским, икра', price: 2980, calories: 410 },
+      { name: 'Утка confit', desc: 'Вишнёвый глазур, пюре из пастернака', price: 2650, calories: 520 },
+      { name: 'Ризотто с трюфелем', desc: 'Чёрный трюфель, выдержанный пармезан', price: 2340, calories: 480 },
     ],
   },
   {
     id: 'desserts',
-    title: 'Desserts',
-    subtitle: 'Десерты',
+    title: 'Десерты',
     items: [
-      { name: 'Soufflé au chocolat', desc: 'Valrhona 70%, gold leaf', price: 980 },
-      { name: 'Crème brûlée', desc: 'Madagascar vanilla, berries', price: 890 },
-      { name: 'Mille-feuille', desc: 'Pistachio cream, rose water', price: 920 },
-      { name: 'Sorbet trio', desc: 'Seasonal fruits, meringue', price: 760 },
+      { name: 'Soufflé au chocolat', desc: 'Valrhona 70%, золотой лист', price: 980, calories: 380 },
+      { name: 'Crème brûlée', desc: 'Ваниль Мадагаскар, ягоды', price: 890, calories: 340 },
+      { name: 'Mille-feuille', desc: 'Фисташковый крем, розовая вода', price: 920, calories: 430 },
+      { name: 'Sorbet trio', desc: 'Сезонные фрукты, меренга', price: 760, calories: 190 },
     ],
   },
   {
     id: 'drinks',
-    title: 'Drinks',
-    subtitle: 'Напитки',
+    title: 'Напитки',
     items: [
-      { name: 'Signature Negroni', desc: 'Barrel-aged gin, house vermouth', price: 1100 },
-      { name: 'Champagne Ruinart', desc: 'Blanc de Blancs, glass', price: 2400 },
-      { name: 'Old Fashioned', desc: 'Single malt, demerara, bitters', price: 980 },
-      { name: 'Sommelier pairing', desc: '4 wines, curated for your menu', price: 5800 },
+      { name: 'Signature Negroni', desc: 'Выдержанный джин, домашний вермут', price: 1100, calories: 200 },
+      { name: 'Champagne Ruinart', desc: 'Blanc de Blancs, бокал', price: 2400, calories: 95 },
+      { name: 'Old Fashioned', desc: 'Односолодовый виски, демерара, биттер', price: 980, calories: 175 },
+      { name: 'Sommelier pairing', desc: '4 вина, подобранных к вашему меню', price: 5800, calories: 320 },
     ],
   },
 ];
 
 export function formatPrice(rub) {
   return `${rub.toLocaleString('ru-RU')} ₽`;
+}
+
+export function formatCalories(kcal) {
+  return `~${kcal} ккал`;
 }
